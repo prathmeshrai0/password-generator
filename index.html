@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .con {
+        border: 2px solid black;
+        height: 70%;
+        width: 60vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto auto;
+        /* Centers the container horizontally */
+        text-align: center;
+        /* Centers the inner content */
+
+        position: absolute;
+        top: 50%;
+        /* Center the top of the container at 50% of the parent's height */
+        left: 50%;
+        /* Center the left side of the container at 50% of the parent's width */
+        transform: translate(-50%, -50%);
+        /* Adjust the position to center the container */
+        /* text-align: center; */
+    }
+
+    #display {
+
+        display: flex;
+        justify-content: space-between;
+        margin: 5px;
+        margin-top: 16px;
+        padding: 5px;
+    }
+
+    #copyButton {
+        display: none;
+     
+    }
+</style>
+
+<body>
+    <div class="con">
+        <input type="number" id="length" name="len" value="3" />
+        <label for="upperCase"> enter the length of your passw </label><br />
+
+        <input type="checkbox" id="upperCase" name="upper" checked="checked" />
+        <label for="upperCase"> want upperCase</label><br />
+
+        <input type="checkbox" id="lowerCase" name="upper" checked="checked" />
+        <label for="upperCase"> lowerCase </label><br />
+
+        <input type="checkbox" id="number" name="upper" checked="checked" />
+        <label for="upperCase"> number </label><br />
+
+        <input type="checkbox" id="specialChar" name="upper" checked="checked" />
+        <label for="upperCase">specialChar</label><br />
+
+        <input type="checkbox" id="funny" name="upper" />
+        <label for="upperCase"> funny </label><br />
+
+        <button type="button" id="btn"> Submit</button>
+
+        <div id="display"> </div>
+        <button id="copyButton">COPY</button>
+    </div>
+    <script>
+
+        // console.log(length.value);
+        // console.log(upperCase.checked);
+        // console.log(upperCase.addEventListener('changed', () => {
+        //     // console.log('dfk')
+        // }));
+        // let a = 'a'
+        // console.log('a'.charCodeAt(0));
+        let length = document.getElementById("length");
+        let funny = document.getElementById("funny");
+        let upperCase = document.getElementById("upperCase");
+        let number = document.getElementById("number");
+        let lowerCase = document.getElementById("lowerCase");
+        let specialchar = document.getElementById("specialChar");
+
+
+
+        class passw {
+
+
+
+            constructor() {
+                this.len = length.value
+                this.fun = funny.checked
+                this.upper = upperCase.checked
+                this.lower = lowerCase.checked
+                this.num = number.checked
+                this.special = specialChar.checked
+            }
+
+            two() {
+                // console.log('kdfj');
+
+                // console.log(this.len);
+                if (this.len < 3) {
+                    alert("error! length should be greater than 3");
+                }
+                else {
+                    console.log('dkf');
+
+                    this.pass = ''
+                    let upp = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                    let low = 'abcdefghijklmnopqrstuvwxyz'
+                    let num = '0123456789'
+                    let spe = '!@#$%^&*()_+=-'
+                    let arr = []
+                    console.log(arr);
+
+                    if (this.upper == true) {
+                        arr.push(upp)
+                    }
+                    if (this.lower == true) {
+                        arr.push(low)
+                    }
+                    if (this.num == true) {
+                        arr.push(num)
+                    }
+                    if (this.special == true) {
+                        arr.push(spe)
+                    }
+                    console.log(arr);
+                    console.log(arr[Math.floor(Math.random() * arr.length)]);
+                    let random_string;
+                    for (let index = 0; index < this.len; index++) {
+                        console.log(index);
+                        random_string = arr[Math.floor(Math.random() * arr.length)]
+
+                        this.pass += random_string[Math.floor(Math.random() * random_string.length)]
+                    }
+                }
+                return this.pass
+            }
+
+
+
+        }
+        let btn = document.getElementById('btn');
+        let display = document.getElementById('display')
+        btn.onclick = function () {
+            let obj = new passw();
+
+            console.log('data gathered');
+
+
+            let password = obj.two()
+      
+             
+            display.innerHTML = password
+
+            let copyButton = document.getElementById('copyButton')
+            copyButton.style.display = 'block'
+        }
+
+        let copyButton = document.getElementById('copyButton')
+        copyButton.onclick  = function ()
+        {
+            let text = display.innerText
+            console.log(text);
+            navigator.clipboard.writeText (text).then (()=>{
+                alert('copied to clipboard')
+            }).catch((err)=>{
+
+                alert('some error occured says: '+err)
+            })
+        }
+    </script>
+</body>
+
+</html>
+
+</body>
+
+</html>
